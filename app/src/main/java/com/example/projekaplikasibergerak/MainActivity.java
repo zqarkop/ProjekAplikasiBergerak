@@ -1,7 +1,7 @@
 package com.example.projekaplikasibergerak;
 
 import android.opengl.Visibility;
-//    import android.support.v7.app.AppCompatActivity; Java nya gabisa
+//    import android.support.v7.app.AppCompatActivity; Done
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 //    import android.support.annotation.NonNull;
