@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "204642593188",
+    "project_id": "projekaplikasibergerak",
+    "storage_bucket": "projekaplikasibergerak.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:204642593188:android:157dfb94fcd82a88c3b931",
+        "android_client_info": {
+          "package_name": "com.example.projekaplikasibergerak"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "204642593188-0rupobv3tjiglftu1stiufa9nt17lch0.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA8VqKu5URXJdhKihdH-D9cNm2c_I5XQW8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "204642593188-0rupobv3tjiglftu1stiufa9nt17lch0.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
