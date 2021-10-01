@@ -23,8 +23,8 @@
         android:id="@+id/button_power"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textOn="MATIKAN LAMPU"
-        android:textOff="HIDUPKAN LAMPU"
+        android:textOn="MATIKAN LAMPU 1"
+        android:textOff="HIDUPKAN LAMPU 1"
         android:layout_marginStart="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp" />
