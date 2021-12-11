@@ -17,9 +17,15 @@ import com.google.firebase.database.FirebaseDatabase;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
-    ToggleButton mButtonPower;
-    ToggleButton mButtonAuto;
-    ImageView mImageStatus;
+    ImageView mButtonKipas;
+    ImageView mButtonLampu;
+    ImageView mButtonAlarm;
+    ImageView mButtonAc;
+
+    boolean keadaanKipas = false;
+    boolean keadaanLampu = false;
+    boolean keadaanAlarm = false;
+    boolean keadaanAc = false;
 
     FirebaseDatabase mDatabase;
 
@@ -31,104 +37,168 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         mDatabase = FirebaseDatabase.getInstance();
 
+        mButtonKipas = findViewById(R.id.button_kipas);
+        mButtonLampu = findViewById(R.id.button_lampu);
+        mButtonAlarm = findViewById(R.id.button_alarm);
+        mButtonAc = findViewById(R.id.button_ac);
 
-        mButtonPower = findViewById(R.id.button_power);
-        mButtonAuto = findViewById(R.id.button_auto);
-        mImageStatus = findViewById(R.id.imageView);
-
-
-        mButtonPower.setOnClickListener(this);
-        mButtonAuto.setOnClickListener(this);
+        mButtonKipas.setOnClickListener(this);
+        mButtonLampu.setOnClickListener(this);
+        mButtonAlarm.setOnClickListener(this);
+        mButtonAc.setOnClickListener(this);
     }
 
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
-            case R.id.button_power:
-                toggleLed();
-                break;
+            case R.id.button_kipas:
+                if(keadaanKipas == false){
+                    turnOnKipas();
+                    keadaanKipas = true;
+                    break;
+                }
+                else{
+                    turnOffKipas();
+                    keadaanKipas = false;
+                    break;
+                }
         }
         switch (view.getId()) {
-            case R.id.button_auto:
-                toggleAuto();
-                break;
+            case R.id.button_lampu:
+                if(keadaanLampu == false){
+                    turnOnLampu();
+                    keadaanLampu = true;
+                    break;
+                }
+                else{
+                    turnOffLampu();
+                    keadaanLampu = false;
+                    break;
+                }
+        }
+        switch (view.getId()) {
+            case R.id.button_alarm:
+                if(keadaanAlarm == false){
+                    turnOnAlarm();
+                    keadaanAlarm = true;
+                    break;
+                }
+                else{
+                    turnOffAlarm();
+                    keadaanAlarm = false;
+                    break;
+                }
+        }
+        switch (view.getId()) {
+            case R.id.button_ac:
+                if(keadaanAc == false){
+                    turnOnAc();
+                    keadaanAc = true;
+                    break;
+                }
+                else{
+                    turnOffAc();
+                    keadaanAc = false;
+                    break;
+                }
         }
     }
 
-    void toggleLed() {
-        if (mButtonPower.isChecked()) {
-            turnOnLed();
-        } else {
-            turnOffLed();
-        }
+    void turnOnKipas() {
+        mDatabase.getReference("kipas").setValue(1).addOnCompleteListener(new OnCompleteListener<Void>() {
+            @Override
+            public void onComplete(@NonNull Task<Void> task) {
+                if (task.isSuccessful()) {
+                    Toast.makeText(MainActivity.this, "KIPAS MENYALA", Toast.LENGTH_SHORT).show();
+                    mButtonKipas.setImageResource(R.drawable.light_on);
+                }
+            }
+        });
     }
 
-    void toggleAuto() {
-        if (mButtonAuto.isChecked()) {
-            mButtonPower.setVisibility(View.VISIBLE);
-            turnOnAuto();
-        } else {
-            turnOffAuto();
-        }
+    void turnOffKipas() {
+        mDatabase.getReference("kipas").setValue(0).addOnCompleteListener(new OnCompleteListener<Void>() {
+            @Override
+            public void onComplete(@NonNull Task<Void> task) {
+                if (task.isSuccessful()) {
+                    Toast.makeText(MainActivity.this, "KIPAS MATI", Toast.LENGTH_SHORT).show();
+                    mButtonKipas.setImageResource(R.drawable.ic_fan);
+                }
+            }
+        });
     }
 
-    void turnOnLed() {
-        mButtonPower.setEnabled(false);
-        mDatabase.getReference("manual").
-                setValue(1).addOnCompleteListener(new OnCompleteListener<Void>() {
+
+
+    void turnOnLampu() {
+        mDatabase.getReference("lampu").setValue(1).addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
             public void onComplete(@NonNull Task<Void> task) {
                 if (task.isSuccessful()) {
                     Toast.makeText(MainActivity.this, "LAMPU MENYALA", Toast.LENGTH_SHORT).show();
-                    mButtonPower.setChecked(true);
-                    mImageStatus.setImageResource(R.drawable.light_on);
+                    mButtonLampu.setImageResource(R.drawable.light_on);
                 }
-                mButtonPower.setEnabled(true);
             }
         });
     }
 
-    void turnOffLed() {
-        mButtonPower.setEnabled(false);
-        mDatabase.getReference("manual").setValue(0).addOnCompleteListener(new OnCompleteListener<Void>() {
+    void turnOffLampu() {
+        mDatabase.getReference("lampu").setValue(0).addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
             public void onComplete(@NonNull Task<Void> task) {
                 if (task.isSuccessful()) {
                     Toast.makeText(MainActivity.this, "LAMPU MATI", Toast.LENGTH_SHORT).show();
-                    mButtonPower.setChecked(false);
-                    mImageStatus.setImageResource(R.drawable.light_off);
+                    mButtonLampu.setImageResource(R.drawable.ic_lightbulb_outline);
                 }
-                mButtonPower.setEnabled(true);
             }
         });
     }
 
-    void turnOnAuto() {
-        mButtonAuto.setEnabled(false);
-        mDatabase.getReference("otomatis").setValue(1).addOnCompleteListener(new OnCompleteListener<Void>() {
+
+    void turnOnAlarm() {
+        mDatabase.getReference("alarm").setValue(1).addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
             public void onComplete(@NonNull Task<Void> task) {
                 if (task.isSuccessful()) {
-                    Toast.makeText(MainActivity.this, "FITUR OTOMATIS MENYALA", Toast.LENGTH_SHORT).show();
-                    mButtonAuto.setChecked(true);
-                    mImageStatus.setImageResource(R.drawable.light_off);
+                    Toast.makeText(MainActivity.this, "ALARM MENYALA", Toast.LENGTH_SHORT).show();
+                    mButtonAlarm.setImageResource(R.drawable.light_on);
                 }
-                mButtonAuto.setEnabled(true);
             }
         });
     }
 
-    void turnOffAuto() {
-        mButtonAuto.setEnabled(false);
-        mDatabase.getReference("otomatis").setValue(0).addOnCompleteListener(new OnCompleteListener<Void>() {
+    void turnOffAlarm() {
+        mDatabase.getReference("alarm").setValue(0).addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
             public void onComplete(@NonNull Task<Void> task) {
                 if (task.isSuccessful()) {
-                    Toast.makeText(MainActivity.this, "FITUR OTOMATIS MATI", Toast.LENGTH_SHORT).show();
-                    mButtonAuto.setChecked(false);
-                    mImageStatus.setImageResource(R.drawable.light_off);
+                    Toast.makeText(MainActivity.this, "ALARM MATI", Toast.LENGTH_SHORT).show();
+                    mButtonAlarm.setImageResource(R.drawable.ic_alarm_light_outline);
                 }
-                mButtonAuto.setEnabled(true);
+            }
+        });
+    }
+
+    void turnOnAc() {
+        mDatabase.getReference("ac").setValue(1).addOnCompleteListener(new OnCompleteListener<Void>() {
+            @Override
+            public void onComplete(@NonNull Task<Void> task) {
+                if (task.isSuccessful()) {
+                    Toast.makeText(MainActivity.this, "AC MENYALA", Toast.LENGTH_SHORT).show();
+                    mButtonAc.setImageResource(R.drawable.light_on);
+                }
+            }
+        });
+    }
+
+    void turnOffAc() {
+        mDatabase.getReference("ac").setValue(0).addOnCompleteListener(new OnCompleteListener<Void>() {
+            @Override
+            public void onComplete(@NonNull Task<Void> task) {
+                if (task.isSuccessful()) {
+                    Toast.makeText(MainActivity.this, "AC MATI", Toast.LENGTH_SHORT).show();
+                    mButtonAc.setImageResource(R.drawable.ic_air_conditioner);
+                }
             }
         });
     }
