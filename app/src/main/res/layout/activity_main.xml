@@ -1,159 +1,43 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#255297"
+    android:gravity="center"
+    android:padding="164dp"
+    android:orientation="vertical"
     tools:context=".MainActivity">
 
-    <LinearLayout
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="124dp"
+        android:layout_height="124dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="56dp"
+        android:src="@drawable/light_off" />
+
+    <ToggleButton
+        android:id="@+id/button_power"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:weightSum="17"
-        >
+        android:layout_height="wrap_content"
+        android:textOn="MATIKAN LAMPU 1"
+        android:textOff="HIDUPKAN LAMPU 1"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp" />
 
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="135dp"
-            android:layout_weight="2">
+    <ToggleButton
+        android:id="@+id/button_auto"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textOff="HIDUPKAN FITUR OTOMATIS"
+        android:textOn="MATIKAN FITUR OTOMATIS"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp" />
 
-            <ImageView
-                android:id="@+id/textGrid"
-                android:layout_width="231dp"
-                android:layout_height="133dp"
-                android:layout_alignParentStart="true"
-                android:layout_alignParentTop="true"
-                android:layout_alignParentEnd="true"
-                android:layout_alignParentBottom="true"
-                android:layout_marginStart="94dp"
-                android:layout_marginTop="10dp"
-                android:layout_marginEnd="85dp"
-                android:layout_marginBottom="-6dp"
-                android:src="@drawable/ic_action_name" />
 
-        </RelativeLayout>
-
-        <GridLayout
-            android:id="@+id/mainGrid"
-            android:layout_width="match_parent"
-            android:layout_height="622dp"
-            android:layout_weight="8"
-            android:alignmentMode="alignMargins"
-            android:columnCount="2"
-            android:columnOrderPreserved="false"
-            android:padding="20dp"
-            android:rowCount="3">
-
-            <androidx.cardview.widget.CardView
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                android:layout_rowWeight="1"
-                android:layout_columnWeight="1"
-                android:layout_marginLeft="16dp"
-                android:layout_marginRight="16dp"
-                android:layout_marginBottom="16dp"
-                app:cardCornerRadius="8dp"
-                app:cardElevation="8dp">
-
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal|center_vertical"
-                    android:layout_margin="13dp"
-                    android:orientation="vertical">
-
-                    <ImageView
-                        android:layout_width="110dp"
-                        android:layout_height="96dp"
-                        android:layout_gravity="center"
-                        android:src="@drawable/ic_lightbulb_outline" />
-
-                </LinearLayout>
-            </androidx.cardview.widget.CardView>
-
-            <androidx.cardview.widget.CardView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_rowWeight="1"
-                android:layout_columnWeight="1"
-                android:layout_marginLeft="16dp"
-                android:layout_marginRight="16dp"
-                android:layout_marginBottom="16dp"
-                app:cardCornerRadius="8dp"
-                app:cardElevation="8dp">
-
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal|center_vertical"
-                    android:layout_margin="13dp"
-                    android:orientation="vertical">
-
-                    <ImageView
-                        android:layout_width="103dp"
-                        android:layout_height="97dp"
-                        android:layout_gravity="center"
-                        android:src="@drawable/ic_fan" />
-
-                </LinearLayout>
-            </androidx.cardview.widget.CardView>
-
-            <androidx.cardview.widget.CardView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_rowWeight="1"
-                android:layout_columnWeight="1"
-                android:layout_marginLeft="16dp"
-                android:layout_marginRight="16dp"
-                android:layout_marginBottom="16dp"
-                app:cardCornerRadius="8dp"
-                app:cardElevation="8dp">
-
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal|center_vertical"
-                    android:layout_margin="13dp"
-                    android:orientation="vertical">
-
-                    <ImageButton
-                        android:layout_width="110dp"
-                        android:layout_height="96dp"
-                        android:layout_gravity="center"
-                        android:background="@drawable/ic_alarm_light_outline" />
-
-                </LinearLayout>
-            </androidx.cardview.widget.CardView>
-
-            <androidx.cardview.widget.CardView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_rowWeight="1"
-                android:layout_columnWeight="1"
-                android:layout_marginLeft="16dp"
-                android:layout_marginRight="16dp"
-                android:layout_marginBottom="16dp"
-                app:cardCornerRadius="8dp"
-                app:cardElevation="8dp">
-
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal|center_vertical"
-                    android:layout_margin="13dp"
-                    android:orientation="vertical">
-
-                    <ImageButton
-                        android:layout_width="90dp"
-                        android:layout_height="101dp"
-                        android:layout_gravity="center"
-                        android:background="@drawable/ic_air_conditioner" />
-
-                </LinearLayout>
-            </androidx.cardview.widget.CardView>
-        </GridLayout>
-    </LinearLayout>
-
-</ScrollView>
+    android:layout_marginBottom="8dp"
+</LinearLayout>
