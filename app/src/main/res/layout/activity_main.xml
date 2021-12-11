@@ -87,7 +87,7 @@
                     <ImageView
                         android:id="@+id/button_kipas"
                         android:layout_width="110dp"
-                        android:layout_height="96dp"
+                        android:layout_height="9dp"
                         android:layout_gravity="center"
                         android:src="@drawable/ic_fan" />
 
