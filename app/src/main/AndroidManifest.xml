@@ -8,9 +8,14 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.ProjekAplikasiBergerak">
+        android:theme="@style/Theme.AppCompat.DayNight.NoActionBar">
+        <activity
+            android:name=".LampuActivity"
+            android:label="Lampu"
+            android:exported="true" />
         <activity
             android:name=".MainActivity"
+            android:label="IAI Smart Home"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

@@ -1,5 +1,7 @@
 package com.example.projekaplikasibergerak;
 
+import android.content.Intent;
+import android.graphics.Color;
 import android.opengl.Visibility;
 //    import android.support.v7.app.AppCompatActivity; Done
 import androidx.appcompat.app.AppCompatActivity;
@@ -11,9 +13,13 @@ import android.widget.ImageView;
 import android.widget.Toast;
 import android.widget.ToggleButton;
 
+import com.akaita.android.circularseekbar.CircularSeekBar;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.database.FirebaseDatabase;
+
+import java.text.DecimalFormat;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -43,9 +49,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         mButtonAc = findViewById(R.id.button_ac);
 
         mButtonKipas.setOnClickListener(this);
-        mButtonLampu.setOnClickListener(this);
         mButtonAlarm.setOnClickListener(this);
         mButtonAc.setOnClickListener(this);
+        mButtonLampu.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(MainActivity.this, LampuActivity.class));
+            }
+        });
     }
 
     @Override
