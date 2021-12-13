@@ -172,7 +172,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             public void onComplete(@NonNull Task<Void> task) {
                 if (task.isSuccessful()) {
                     Toast.makeText(MainActivity.this, "ALARM MENYALA", Toast.LENGTH_SHORT).show();
-                    mButtonAlarm.setImageResource(R.drawable.light_on);
+                    mButtonAlarm.setImageResource(R.drawable.ic_alarm_light);
                 }
             }
         });
@@ -196,7 +196,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             public void onComplete(@NonNull Task<Void> task) {
                 if (task.isSuccessful()) {
                     Toast.makeText(MainActivity.this, "AC MENYALA", Toast.LENGTH_SHORT).show();
-                    mButtonAc.setImageResource(R.drawable.light_on);
+                    mButtonAc.setImageResource(R.drawable.ic_acon);
                 }
             }
         });
@@ -208,7 +208,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             public void onComplete(@NonNull Task<Void> task) {
                 if (task.isSuccessful()) {
                     Toast.makeText(MainActivity.this, "AC MATI", Toast.LENGTH_SHORT).show();
-                    mButtonAc.setImageResource(R.drawable.ic_air_conditioner);
+                    mButtonAc.setImageResource(R.drawable.ic_acoff);
                 }
             }
         });
