@@ -121,7 +121,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             public void onComplete(@NonNull Task<Void> task) {
                 if (task.isSuccessful()) {
                     Toast.makeText(MainActivity.this, "KIPAS MENYALA", Toast.LENGTH_SHORT).show();
-                    mButtonKipas.setImageResource(R.drawable.light_on);
+                    mButtonKipas.setImageResource(R.drawable.ic_fan);
                 }
             }
         });
@@ -133,7 +133,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             public void onComplete(@NonNull Task<Void> task) {
                 if (task.isSuccessful()) {
                     Toast.makeText(MainActivity.this, "KIPAS MATI", Toast.LENGTH_SHORT).show();
-                    mButtonKipas.setImageResource(R.drawable.ic_fan);
+                    mButtonKipas.setImageResource(R.drawable.ic_fan_off);
                 }
             }
         });
