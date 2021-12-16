@@ -1,25 +1,23 @@
 package com.example.projekaplikasibergerak;
 
 import android.content.Intent;
-import android.graphics.Color;
-import android.opengl.Visibility;
-//    import android.support.v7.app.AppCompatActivity; Done
-import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
-//    import android.support.annotation.NonNull;
-import androidx.annotation.NonNull;
+import android.view.MotionEvent;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.Toast;
-import android.widget.ToggleButton;
 
-import com.akaita.android.circularseekbar.CircularSeekBar;
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
-import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.database.FirebaseDatabase;
 
-import java.text.DecimalFormat;
+//    import android.support.v7.app.AppCompatActivity; Done
+//    import android.support.annotation.NonNull;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -32,6 +30,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     boolean keadaanLampu = false;
     boolean keadaanAlarm = false;
     boolean keadaanAc = false;
+
+    Animation scaleUp,scaleDown;
 
     FirebaseDatabase mDatabase;
 
@@ -48,9 +48,54 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         mButtonAlarm = findViewById(R.id.button_alarm);
         mButtonAc = findViewById(R.id.button_ac);
 
+        scaleUp = AnimationUtils.loadAnimation(this,R.anim.scale_up);
+        scaleDown = AnimationUtils.loadAnimation(this,R.anim.scale_down);
+
         mButtonKipas.setOnClickListener(this);
+        mButtonKipas.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View view, MotionEvent motionEvent) {
+
+                if(motionEvent.getAction()== MotionEvent.ACTION_UP) {
+                    mButtonKipas.startAnimation(scaleUp);
+                }else if(motionEvent.getAction()== MotionEvent.ACTION_DOWN) {
+                    mButtonKipas.startAnimation(scaleDown);
+                }
+                turnOnKipas();
+
+                return true;
+            }
+        });
         mButtonAlarm.setOnClickListener(this);
+        mButtonAlarm.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View view, MotionEvent motionEvent) {
+
+                if(motionEvent.getAction()== MotionEvent.ACTION_UP) {
+                    mButtonAlarm.startAnimation(scaleUp);
+                }else if(motionEvent.getAction()== MotionEvent.ACTION_DOWN) {
+                    mButtonAlarm.startAnimation(scaleDown);
+                }
+                turnOnAlarm();
+
+                return true;
+            }
+        });
         mButtonAc.setOnClickListener(this);
+        mButtonAc.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View view, MotionEvent motionEvent) {
+
+                if(motionEvent.getAction()== MotionEvent.ACTION_UP) {
+                    mButtonAc.startAnimation(scaleUp);
+                }else if(motionEvent.getAction()== MotionEvent.ACTION_DOWN) {
+                    mButtonAc.startAnimation(scaleDown);
+                }
+                turnOnAc();
+
+                return true;
+            }
+        });
         mButtonLampu.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -213,4 +258,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             }
         });
     }
-}
+
+    }
+
