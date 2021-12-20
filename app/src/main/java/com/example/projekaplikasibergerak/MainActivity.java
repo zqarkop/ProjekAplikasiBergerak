@@ -31,6 +31,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     boolean keadaanAlarm = false;
     boolean keadaanAc = false;
 
+    int countKipas = 1;
+    int countAlarm = 1;
+    int countAC = 1;
+
     Animation scaleUp,scaleDown;
 
     FirebaseDatabase mDatabase;
@@ -51,7 +55,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         scaleUp = AnimationUtils.loadAnimation(this,R.anim.scale_up);
         scaleDown = AnimationUtils.loadAnimation(this,R.anim.scale_down);
 
-        mButtonKipas.setOnClickListener(this);
         mButtonKipas.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View view, MotionEvent motionEvent) {
@@ -61,12 +64,22 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 }else if(motionEvent.getAction()== MotionEvent.ACTION_DOWN) {
                     mButtonKipas.startAnimation(scaleDown);
                 }
-                turnOnKipas();
+                if(keadaanKipas == false){
+                    turnOffKipas();
+                    keadaanKipas = true;
+                    countKipas++;
+                }
+                else{
+                    if(countKipas == 2){
+                        turnOnKipas();
+                        countKipas = 0;
+                    }
+                    keadaanKipas = false;
+                }
 
                 return true;
             }
         });
-        mButtonAlarm.setOnClickListener(this);
         mButtonAlarm.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View view, MotionEvent motionEvent) {
@@ -76,12 +89,22 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 }else if(motionEvent.getAction()== MotionEvent.ACTION_DOWN) {
                     mButtonAlarm.startAnimation(scaleDown);
                 }
-                turnOnAlarm();
+                if(keadaanAlarm == false){
+                    turnOffAlarm();
+                    keadaanAlarm = true;
+                    countAlarm++;
+                }
+                else{
+                    if(countAlarm == 2){
+                        turnOnAlarm();
+                        countAlarm = 0;
+                    }
+                    keadaanAlarm = false;
+                }
 
                 return true;
             }
         });
-        mButtonAc.setOnClickListener(this);
         mButtonAc.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View view, MotionEvent motionEvent) {
@@ -91,7 +114,18 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 }else if(motionEvent.getAction()== MotionEvent.ACTION_DOWN) {
                     mButtonAc.startAnimation(scaleDown);
                 }
-                turnOnAc();
+                if(keadaanAc == false){
+                    turnOffAc();
+                    keadaanAc = true;
+                    countAC++;
+                }
+                else{
+                    if(countAC == 2){
+                        turnOnAc();
+                        countAC = 0;
+                    }
+                    keadaanAc = false;
+                }
 
                 return true;
             }

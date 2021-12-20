@@ -1,10 +1,10 @@
 package com.example.projekaplikasibergerak;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.graphics.Color;
 import android.os.Bundle;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.akaita.android.circularseekbar.CircularSeekBar;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -64,7 +64,7 @@ public class LampuActivity extends AppCompatActivity {
 
         CircularSeekBar lampuRuang2 = (CircularSeekBar) findViewById(R.id.lampuRuang2);
         lampuRuang2.setProgressTextFormat(new DecimalFormat("###,###,##0.00"));
-        lampuRuang2.setRingColor(Color.BLUE);
+        lampuRuang2.setRingColor(Color.RED);
 
         lampuRuang2.setOnCenterClickedListener(new CircularSeekBar.OnCenterClickedListener() {
             @Override
@@ -101,7 +101,7 @@ public class LampuActivity extends AppCompatActivity {
 
         CircularSeekBar lampuRuang3 = (CircularSeekBar) findViewById(R.id.lampuRuang3);
         lampuRuang3.setProgressTextFormat(new DecimalFormat("###,###,##0.00"));
-        lampuRuang3.setRingColor(Color.RED);
+        lampuRuang3.setRingColor(Color.BLUE);
 
         lampuRuang3.setOnCenterClickedListener(new CircularSeekBar.OnCenterClickedListener() {
             @Override
