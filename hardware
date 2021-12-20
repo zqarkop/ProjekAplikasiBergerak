@@ -1,0 +1,108 @@
+#include <FirebaseArduino.h>
+#include <ESP8266WiFi.h>
+#include <Firebase.h>
+
+#define FIREBASE_HOST "projekaplikasibergerak-default-rtdb.firebaseio.com"
+#define FIREBASE_AUTH "SjomoPigmaTjSLFcUi5BxTuOeBnciD1rYV5ZZAmc"
+#define WIFI_SSID "AndiSaputra"
+#define WIFI_PASSWORD "12345098765"
+
+byte alarm= D0;
+byte ac= D4;
+byte kipas= D5;
+byte lampu1= D6;
+byte lampu2= D7;
+byte lampu3= D8;
+float lampu1Value;
+float lampu2Value;
+float lampu3Value;
+bool kondisiAC = true;
+
+
+void setup() {
+  WiFi.begin(WIFI_SSID, WIFI_PASSWORD);
+  Serial.begin(9600);
+  Serial.print("sedang menghubungkan dengan jaringan wifi !!!");
+  while (WiFi.status() != WL_CONNECTED) {
+        Serial.print(".");
+        delay(500);
+        }
+  Serial.println();
+  Serial.print("terkoneksi dengan ip address: ");
+  Serial.println(WiFi.localIP());
+  
+  Firebase.begin(FIREBASE_HOST, FIREBASE_AUTH); 
+  Firebase.stream("/ac");
+  Firebase.stream("/alarm");
+  Firebase.stream("/kipas");
+  Firebase.stream("/lampuRuang1");
+  Firebase.stream("/lampuRuang2");
+  Firebase.stream("/lampuRuang3");
+  
+  pinMode(ac, OUTPUT);
+  pinMode(alarm, OUTPUT);
+  pinMode(kipas, OUTPUT);
+  pinMode(lampu1, OUTPUT);
+  pinMode(lampu2, OUTPUT);
+  pinMode(lampu3, OUTPUT);
+}
+void loop() {
+ if (Firebase.failed()){
+    Serial.print(" streaming error");
+    Serial.print(Firebase.error());
+ }
+
+  ac = Firebase.getInt("ac");
+  alarm = Firebase.getInt("alarm");
+  kipas = Firebase.getInt("kipas");
+  lampu1Value = Firebase.getInt("lampuRuang1");
+  lampu1Value = lampu1Value/100*1023;
+  lampu2Value = Firebase.getInt("lampuRuang2");
+  lampu2Value = lampu2Value/100*1023;
+  lampu3Value = Firebase.getInt("lampuRuang3");
+  lampu3Value = lampu3Value/100*1023;
+
+//  Serial.println(ac);
+  if(ac==1){
+    digitalWrite(D4, HIGH);
+    if(kondisiAC == true){
+      digitalWrite(D0, HIGH);
+      delay(100);
+      digitalWrite(D0, LOW);
+      kondisiAC = false;
+    }
+  }
+  else{
+    digitalWrite(D4, LOW);
+    if(kondisiAC == false){
+      digitalWrite(D0, HIGH);
+      delay(100);
+      digitalWrite(D0, LOW);
+      kondisiAC = true;
+    }
+    kondisiAC = true;
+  }
+  if(alarm==1){
+    digitalWrite(D0, HIGH);
+  }
+  else{
+    digitalWrite(D0, LOW);
+  }
+  if(kipas==1){
+    digitalWrite(D5, HIGH);
+  }
+  else{
+    digitalWrite(D5, LOW);
+  }
+  analogWrite(D6, lampu1Value);
+  analogWrite(D7, lampu2Value);
+  analogWrite(D8, lampu3Value);
+//  Serial.println(lampu1Value);
+//  Serial.println(lampu2Value);
+//  Serial.println(lampu3Value);
+  Serial.println(ac);
+  Serial.println(kondisiAC);
+
+  
+  delay(50);
+}
